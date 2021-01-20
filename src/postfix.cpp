@@ -22,14 +22,14 @@ std::map<char, int> priority{
         {'9', 5},
 };
 
-std::vector<std::string> split(const std::string &s) {
+std::vector<std::string> split(std::string s) {
     std::vector<std::string> container;
     std::string buffer;
     for (auto x : s) {
         if (x == ' ') {
             if (buffer.length() > 0) {
                 container.push_back(buffer);
-                buffer.clear();
+                buffer = "";
             }
         } else {
             buffer += x;
@@ -40,7 +40,7 @@ std::vector<std::string> split(const std::string &s) {
     return container;
 }
 
-std::string normalize(const std::string &s) {
+std::string normalize(std::string s) {
     std::string result;
     for (auto x : s) {
         if (x == ')' ||
