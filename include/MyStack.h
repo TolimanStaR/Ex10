@@ -4,12 +4,12 @@
 
 template<class T>
 class MyStack {
-private:
-    T *container;
-    int capacity;
-    int size;
+ private:
+  T *container;
+  int capacity;
+  int size;
 
-public:
+ public:
     explicit MyStack(int cap) {
         this->capacity = cap;
         this->size = -1;
