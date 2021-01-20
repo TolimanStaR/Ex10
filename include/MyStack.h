@@ -4,12 +4,12 @@
 
 template<class T>
 class MyStack {
- private:
-  T *container;
-  int capacity;
-  int size;
+private:
+    T *container;
+    int capacity;
+    int size;
 
- public:
+public:
     explicit MyStack(int cap) {
         this->capacity = cap;
         this->size = -1;
@@ -22,6 +22,10 @@ class MyStack {
         this->container = new T[this->capacity];
         for (int i = 0; i < this->capacity; ++i)
             this->container[i] = stack.container[i];
+    }
+
+    ~MyStack() {
+        delete[] this->container;
     }
 
     T get() const {

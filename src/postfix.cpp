@@ -20,6 +20,7 @@ std::map<char, int> priority{
         {'7', 5},
         {'8', 5},
         {'9', 5},
+        {' ', 5},
 };
 
 std::vector<std::string> split(std::string s) {
