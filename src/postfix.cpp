@@ -66,27 +66,29 @@ std::string infix2postfix(std::string infix) {
     infix = normalize(infix);
     auto expression = split(infix);
     for (auto statement : expression) {
-        if (priority[statement[0]] == 5)
+        if (priority[statement[0]] == 5) {
             result += statement + ' ';
-        else if (priority[statement[0]] == 0 ||
-                 priority[stack.get()[0]] < priority[statement[0]] &&
-                 priority[statement[0]] != 5 ||
-                 stack.isEmpty()) {
-            stack.push(statement);
         } else {
-            if (statement != ")") {
-                while (priority[stack.get()[0]] >= priority[statement[0]])
-                    result += stack.pop() + ' ';
+            if (priority[statement[0]] == 0 ||
+                priority[stack.get()[0]] < priority[statement[0]] &&
+                priority[statement[0]] != 5 ||
+                stack.isEmpty()) {
                 stack.push(statement);
             } else {
-                while (stack.get() != "(")
-                    result += stack.pop() + ' ';
-                stack.pop();
+                if (statement != ")") {
+                    while (priority[stack.get()[0]] >= priority[statement[0]])
+                        result += stack.pop() + ' ';
+                    stack.push(statement);
+                } else {
+                    while (stack.get() != "(")
+                        result += stack.pop() + ' ';
+                    stack.pop();
+                }
             }
         }
+        while (!stack.isEmpty())
+            result += stack.pop() + ' ';
+        result = result.substr(0, result.length() - 1);
+        return result;
     }
-    while (!stack.isEmpty())
-        result += stack.pop() + ' ';
-    result = result.substr(0, result.length() - 1);
-    return result;
 }
