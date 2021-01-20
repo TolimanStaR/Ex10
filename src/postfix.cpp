@@ -25,13 +25,15 @@ std::map<char, int> priority{
 std::vector<std::string> split(const std::string &s) {
     std::vector<std::string> container;
     std::string buffer;
-    for (auto &x:s) {
+    for (auto x : s) {
         if (x == ' ') {
             if (buffer.length() > 0) {
                 container.push_back(buffer);
                 buffer.clear();
             }
-        } else buffer += x;
+        } else {
+            buffer += x;
+        }
     }
     if (buffer.length() > 0)
         container.push_back(buffer);
@@ -40,7 +42,7 @@ std::vector<std::string> split(const std::string &s) {
 
 std::string normalize(const std::string &s) {
     std::string result;
-    for (auto &x: s) {
+    for (auto x : s) {
         if (x == ')' ||
             x == '(' ||
             x == '+' ||
@@ -51,18 +53,19 @@ std::string normalize(const std::string &s) {
             result += ' ';
             result += x;
             result += ' ';
-        } else
+        } else {
             result += x;
+        }
     }
     return result;
 }
 
 std::string infix2postfix(std::string infix) {
     std::string result;
-    MyStack<std::string> stack(10000);
+    MyStack<std::string> stack(1000);
     infix = normalize(infix);
     auto expression = split(infix);
-    for (auto &statement:expression) {
+    for (auto statement : expression) {
         if (priority[statement[0]] == 5)
             result += statement + ' ';
         else if (priority[statement[0]] == 0 ||
@@ -84,5 +87,6 @@ std::string infix2postfix(std::string infix) {
     }
     while (!stack.isEmpty())
         result += stack.pop() + ' ';
-    return result.substr(0, result.length() - 1);
+    result = result.substr(0, result.length() - 1);
+    return result;
 }
