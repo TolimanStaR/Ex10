@@ -86,9 +86,9 @@ std::string infix2postfix(std::string infix) {
                 }
             }
         }
-        while (!stack.isEmpty())
-            result += stack.pop() + ' ';
-        result = result.substr(0, result.length() - 1);
-        return result;
     }
+    while (!stack.isEmpty())
+        result += stack.pop() + ' ';
+    result = result.substr(0, result.length() - 1);
+    return result;
 }
